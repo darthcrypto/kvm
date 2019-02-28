@@ -1,5 +1,7 @@
 #!/bin/bash
 
+##########big kickstart file for hardware
+
 
 #launch a vm
 virt-install --name=template-64g \
@@ -9,11 +11,9 @@ virt-install --name=template-64g \
 --disk size=5 \
 --os-variant=debian8
 
+-----after initial provision
+###ssh to ansible server and run playbook to setup kvm on the server##########
 
-###install kvm
-
-###local install ansible
-https://www.linuxschoolonline.com/how-to-install-ansible-offline-on-centos-or-redhat/
 
 
 ####install a vm via automated kickstart
@@ -23,11 +23,7 @@ virt-install -n domain-controller.stuff.net \
 -l http://192.168.56.254/iso/ \
 -x ks=http://192.168.56.254/ks/domain-controller.ks
 
-
-#domain-controller ks
-wget -O ansible-packages
-yum localinstall -y python-crypto2.6-2.6.1-2.el6.x86_64.rpm python-httplib2-0.7.41.el6.art.noarch.rpm python-jinja2-26-2.6-3.el6.noarch.rpm python-keyczar-0.71c 1.el6.noarch.rpm sshpass-1.05-5.el6.art.x86_64.rpm
-
+#inside the the ks of every server:
 touch /tmp/.ready
 
 #wait for vm to launch
@@ -42,4 +38,10 @@ do
      sleep 5;
   fi
 done
+
+########once all VMs are launched:
+ssh to ansible server and run playbooks
+	-domain
+	-blah
+	-blah
 
